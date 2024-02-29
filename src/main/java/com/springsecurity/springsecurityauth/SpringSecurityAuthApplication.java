@@ -51,5 +51,34 @@ public class SpringSecurityAuthApplication implements CommandLineRunner {
         System.out.println("Products in category " + categoryId1.getName() + ":");
         categoryId1.getProducts().forEach(
                 product -> System.out.println("Product : " + product.getName()));
+
+//
+
+        categoryService.getCategories().forEach(
+                category -> System.out.println(category.getName()));
+
+        Category newCategory = new Category();
+        newCategory.setName("Promotion");
+        // Add the new category [1]
+        newCategory = categoryService.addCategory(newCategory);
+        // Print the categories
+        System.out.println("-------------------");
+        System.out.println("Categories : ");
+        categoryService.getCategories().forEach(
+                category -> System.out.println(category.getName()));
+
+        Product newProduct = new Product();
+        newProduct.setName("AssuranceAuTiersFidelite");
+        newProduct.setDescription("Les garanties de l'assurance au tiers à un prix moindre grâce à votre fidélité!");
+        newProduct.setCost(1100);
+        // Add the new product [2]
+        newCategory.addProduct(newProduct);
+        newProduct = productService.addProduct(newProduct);
+        productService.getProducts().forEach(
+                product -> System.out.println(product.getName()));
+
+        newProduct.getCategories().forEach(
+                category -> System.out.println(category.getName()));
     }
-}
+    }
+
