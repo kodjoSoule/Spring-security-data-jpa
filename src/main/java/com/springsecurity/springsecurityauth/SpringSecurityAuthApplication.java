@@ -12,6 +12,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.util.List;
 import java.util.Optional;
 
 @SpringBootApplication
@@ -72,7 +73,7 @@ public class SpringSecurityAuthApplication implements CommandLineRunner {
                 category -> System.out.println(category.getName()));
 
         Product newProduct = new Product();
-        newProduct.setName("AssuranceAuTiersFidelite");
+        newProduct.setName("AssuranceTousRisques");
         newProduct.setDescription("Les garanties de l'assurance au tiers à un prix moindre grâce à votre fidélité!");
         newProduct.setCost(1100);
         // Add the new product [2]
@@ -139,6 +140,19 @@ public class SpringSecurityAuthApplication implements CommandLineRunner {
         }else{
             System.out.println("Product 2 not found");
         }
+
+        //search product
+
+        List<Product> searchResults = productService.getProductByName("AssuranceTousRisques");
+        if(searchResults.size() == 0) {
+            System.out.println("No products found");
+        }else{
+            System.out.println("Products found : ");
+            searchResults.forEach(
+                    product -> System.out.println("Product : " + product.getName()));
+        }
+
+
     }
     }
 
