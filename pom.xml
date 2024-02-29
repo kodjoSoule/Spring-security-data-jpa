@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.springsecurity</groupId>
-    <artifactId>Spring-security-auth</artifactId>
+    <artifactId>Spring-security-data-jpa</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>Spring-security-auth</name>
     <description>Spring-security-auth</description>
