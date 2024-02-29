@@ -11,6 +11,10 @@ public class LoginController {
     public String login() {
         return "login";
     }
+    @RequestMapping("/manager")
+    public String manager() {
+        return "Welcome, manager";
+    }
 
     @RequestMapping("/home")
     public String home() {
