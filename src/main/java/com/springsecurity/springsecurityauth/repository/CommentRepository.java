@@ -14,4 +14,5 @@ public interface CommentRepository extends CrudRepository<Comment, Long>{
     public Optional<Comment> findById(long id);
     public void deleteById(long id);
 
+    Iterable<Comment> findByContentContaining(String deçu);
 }

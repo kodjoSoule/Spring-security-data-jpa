@@ -151,6 +151,25 @@ public class SpringSecurityAuthApplication implements CommandLineRunner {
             searchResults.forEach(
                     product -> System.out.println("Product : " + product.getName()));
         }
+        // search product by category
+
+        searchResults.forEach(product -> System.out.println(product.getId()));
+
+        searchResults = productService.getProductsByCategoryName("Standard");
+        searchResults.forEach(product -> System.out.println(product.getName()));
+
+        searchResults = productService.getProductsByCostLessThan(1000);
+        searchResults.forEach(product -> System.out.println("Product " +
+                " "+product.getName()));
+
+        List<Category> searchCategory = categoryService.getCategoryByName("Standard");
+        searchCategory.forEach(category -> System.out.println(category.getCategoryId()));
+
+        searchCategory = categoryService.getCategoriesByProductName("AssuranceTousRisques");
+        searchCategory.forEach(category -> System.out.println(category.getName()));
+
+        Iterable<Comment> searchComments = commentService.getCommentContaining("deçu");
+        searchComments.forEach(comment -> System.out.println(comment.getContent()));
 
 
     }

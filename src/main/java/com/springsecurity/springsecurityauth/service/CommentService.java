@@ -31,6 +31,7 @@ public class CommentService {
     }
 
 
-
-
+    public Iterable<Comment> getCommentContaining(String deçu) {
+        return commentRepository.findByContentContaining(deçu);
+    }
 }

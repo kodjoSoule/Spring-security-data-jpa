@@ -27,4 +27,11 @@ public class CategoryService {
     }
 
 
+    public List<Category> getCategoryByName(String standard) {
+        return categoryRepository.findByName(standard);
+    }
+
+    public List<Category> getCategoriesByProductName(String assuranceTousRisques) {
+        return categoryRepository.findByProductsName(assuranceTousRisques);
+    }
 }

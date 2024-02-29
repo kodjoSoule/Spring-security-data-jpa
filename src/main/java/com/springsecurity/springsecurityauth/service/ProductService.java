@@ -32,4 +32,12 @@ public class ProductService {
     public List<Product> getProductByName(String name) {
         return productRepository.findByName(name);
     }
+
+    public List<Product> getProductsByCategoryName(String standard) {
+        return productRepository.findByCategoriesName(standard);
+    }
+
+    public List<Product> getProductsByCostLessThan(int i) {
+        return productRepository.findByCostLessThan(i);
+    }
 }

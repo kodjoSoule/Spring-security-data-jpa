@@ -13,4 +13,8 @@ public interface CategoryRepository extends CrudRepository<Category, Long> {
     public List<Category> findAll();
     //find by id
     public Optional<Category> findById(long id);
+
+    List<Category> findByName(String standard);
+
+    List<Category> findByProductsName(String assuranceTousRisques);
 }
