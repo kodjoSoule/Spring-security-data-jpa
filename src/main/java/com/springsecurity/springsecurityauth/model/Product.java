@@ -2,12 +2,14 @@ package com.springsecurity.springsecurityauth.model;
 
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.DynamicUpdate;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "t_product")
+@DynamicUpdate
 public class Product {
 
     @Id
@@ -26,10 +28,9 @@ public class Product {
 
 
     @OneToMany(
+            mappedBy = "product",
             cascade = CascadeType.ALL,
-            orphanRemoval = true,
-            fetch = FetchType.EAGER)
-    @JoinColumn(name = "produit_id")
+            orphanRemoval = true)
     List<Comment> comments = new ArrayList<>();
 
     public List<Category> getCategories() {
@@ -97,7 +98,7 @@ public class Product {
 
     public void removeComment(Comment comment) {
         comments.remove(comment);
-        comment.setProduct(null);
+        comment.setProduct(this);
     }
 
 }

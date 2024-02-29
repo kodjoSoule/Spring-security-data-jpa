@@ -16,6 +16,10 @@ public class Comment {
     @JoinColumn(name="produit_id")
     private Product product;
 
+    public Comment(String content) {
+        this.content = content;
+    }
+
     public int getId() {
         return id;
     }
