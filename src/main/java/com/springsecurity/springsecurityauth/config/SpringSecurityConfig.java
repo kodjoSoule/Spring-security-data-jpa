@@ -27,9 +27,10 @@ public class SpringSecurityConfig {
                 .requestMatchers("/user").hasRole("USER")
                 .requestMatchers("/manager").hasRole("MANAGER")
                 //pour permettre à tout le monde d'accéder à cette URL
-                .anyRequest().authenticated()
+                .anyRequest().permitAll()
         ).formLogin(Customizer.withDefaults());
-
+        http.csrf().disable();
+        http.headers().frameOptions().disable();
         return http.build();
 
     }

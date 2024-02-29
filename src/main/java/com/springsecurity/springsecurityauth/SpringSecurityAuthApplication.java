@@ -1,7 +1,10 @@
 package com.springsecurity.springsecurityauth;
 
+import com.springsecurity.springsecurityauth.model.Category;
 import com.springsecurity.springsecurityauth.model.Product;
+import com.springsecurity.springsecurityauth.service.CategoryService;
 import com.springsecurity.springsecurityauth.service.ProductService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -14,6 +17,8 @@ public class SpringSecurityAuthApplication implements CommandLineRunner {
 
     @Autowired
     ProductService productService;
+    @Autowired
+    CategoryService categoryService;
 
     public static void main(String[] args)
     {
@@ -21,23 +26,30 @@ public class SpringSecurityAuthApplication implements CommandLineRunner {
     }
 
     @Override
+    @Transactional
     public void run(String... args) throws Exception {
         System.out.println("----------------------------------------------------------");
         System.out.println("Application started");
-        Iterable<Product> products = productService.getProducts();
-        if (products != null) {
-            products.forEach(
-                    product -> System.out.println("Product name : "+ product.getName())
-            );
-        }
-        System.out.println("----------------------------------------------------------");
-        Optional<Product> optProduct = productService.getProductById(1);
-        if(optProduct.isEmpty())
-        {
+        Optional<Category> optCategory = categoryService.getCategoryById(1);
+        Category categoryId1 = optCategory.get();
+
+        Optional<Product> product1 = productService.getProductById(1);
+        if(product1.isPresent()) {
+            categoryId1.addProduct(product1.get());
+        }else{
             System.out.println("Product not found");
-            return;
         }
-        Product productId1 = optProduct.get();
-        System.out.println(productId1.getName());
+
+
+        System.out.println(categoryId1.getName());
+        if(categoryId1.getProducts().size() == 0) {
+            System.out.println("No products found");
+            return; // No products found
+        }
+        // Print the products
+        System.out.println("-------------------");
+        System.out.println("Products in category " + categoryId1.getName() + ":");
+        categoryId1.getProducts().forEach(
+                product -> System.out.println("Product : " + product.getName()));
     }
 }

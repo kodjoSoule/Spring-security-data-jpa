@@ -10,6 +10,11 @@ public class Comment {
     private int id;
     @Column(name = "commentaire")
     private String content;
+    @ManyToOne(
+            cascade = CascadeType.ALL
+    )
+    @JoinColumn(name="produit_id")
+    private Product product;
 
     public int getId() {
         return id;
@@ -25,5 +30,11 @@ public class Comment {
     }
 
 
+    public Product getProduct() {
+        return product;
+    }
 
+    public void setProduct(Product product) {
+        this.product = product;
+    }
 }
