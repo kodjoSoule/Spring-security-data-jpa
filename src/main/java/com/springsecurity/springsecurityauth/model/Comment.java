@@ -15,6 +15,8 @@ public class Comment {
     )
     @JoinColumn(name="produit_id")
     private Product product;
+    public  Comment() {
+    }
 
     public Comment(String content) {
         this.content = content;
